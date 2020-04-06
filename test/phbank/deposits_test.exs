@@ -2,6 +2,10 @@ defmodule Phbank.DepositsTest do
   use Phbank.DataCase
 
   alias Phbank.Deposits
+  alias Phbank.Deposits.CurrentAcc
+  # doctest CurrentAcc
+
+  alias Phbank.Deposits
 
   describe "current_accs" do
     alias Phbank.Deposits.CurrentAcc

@@ -46,7 +46,7 @@ defmodule PhbankWeb.CurrentAccController do
 
     new_balance = CurrentAcc.countBalance(balance, deposit, withdrawal)
 
-    case Deposits.update_balance!(id, new_balance)do
+    case Deposits.update_balance!(id, new_balance) do
       {:ok, current_acc} ->
         conn
         |> put_flash(:info, "Current account updated successfully.")

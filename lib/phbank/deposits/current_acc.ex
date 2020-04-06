@@ -17,6 +17,15 @@ defmodule Phbank.Deposits.CurrentAcc do
     |> validate_required([:accountNumber, :balance, :status])
   end
 
+@doc """
+  Returns new balance.
+
+  ## Examples
+
+      iex> countBalance("10", "4", "0")
+      14
+
+  """
   def countBalance(balance, deposit, withdrawal) do
 
     {balance, _} = case balance do

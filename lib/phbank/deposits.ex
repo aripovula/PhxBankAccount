@@ -39,22 +39,41 @@ defmodule Phbank.Deposits do
   def get_current_acc!(id), do: Repo.get!(CurrentAcc, id)
 
   @doc """
-  Gets a single current_acc.
+  Update balance on a single current_acc.
 
   Raises `Ecto.NoResultsError` if the Current acc does not exist.
 
   ## Examples
 
-      iex> get_current_acc!(123)
+      iex> update_balance!(123, 11)
       %CurrentAcc{}
 
-      iex> get_current_acc!(456)
+      iex> update_balance!(456, 22)
       ** (Ecto.NoResultsError)
 
   """
   def update_balance!(id, balance), do:
   Repo.get!(CurrentAcc, id)
   |> change(%{balance: balance})
+  |> Repo.update()
+
+  @doc """
+  Update status of a single current_acc.
+
+  Raises `Ecto.NoResultsError` if the Current acc does not exist.
+
+  ## Examples
+
+      iex> update_status!(123, "Active")
+      %CurrentAcc{}
+
+      iex> update_balance!(456, "Closed")
+      ** (Ecto.NoResultsError)
+
+  """
+  def update_status!(id, status), do:
+  Repo.get!(CurrentAcc, id)
+  |> change(%{status: status})
   |> Repo.update()
 
   @doc """

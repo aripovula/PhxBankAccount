@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :phbank, Phbank.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "ula",
+  password: "",
   database: "phbank_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
