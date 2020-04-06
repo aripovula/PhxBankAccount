@@ -1,0 +1,30 @@
+<h2>Current accounts</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account Number</th>
+      <th>Balance</th>
+      <th>Status</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for current_acc <- @current_accs do %>
+    <tr>
+      <td><%= current_acc.accountNumber %></td>
+      <td><%= current_acc.balance %></td>
+      <td><%= current_acc.status %></td>
+
+      <td>
+        <span><%= link "details", to: Routes.current_acc_path(@conn, :show, current_acc) %>&nbsp; &nbsp;</span>
+        <span><%= link "deposit / withdraw", to: Routes.current_acc_path(@conn, :edit, current_acc) %>&nbsp; &nbsp;</span>
+        <span><%= link "close", to: Routes.current_acc_path(@conn, :delete, current_acc), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New account", to: Routes.current_acc_path(@conn, :new) %></span>

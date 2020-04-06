@@ -1,0 +1,31 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <br/>
+  <b><%= "Account number:" %></b>
+  <%= @current_acc.accountNumber %>
+  <br/><br/>
+  <b><%= "Balance" %></b>
+  <%= @current_acc.balance %>
+  <br/><br/>
+
+  <%= hidden_input f, :balance %>
+  
+  <%= label f, "Deposit amount:" %>
+  <%= number_input f, :deposit, step: "any", min: 0 %>
+  <%= error_tag f, :deposit %>
+
+  <%= label f, "Withdrawal amount:" %>
+  <%= number_input f, :withdrawal, step: "any", min: 0, max: @current_acc.balance %>
+  <%= error_tag f, :withdrawal %>
+
+  
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
