@@ -4,7 +4,7 @@ defmodule PhbankWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -15,9 +15,8 @@ defmodule PhbankWeb.Router do
 
   scope "/", PhbankWeb do
     pipe_through :browser
-    get "/current_accs/withdraw", CurrentAccController, :withdraw
 
-    get "/", PageController, :index
+    live("/", Counter)
     resources "/current_accs", CurrentAccController
   end
 

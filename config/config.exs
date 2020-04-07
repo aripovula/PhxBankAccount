@@ -16,7 +16,7 @@ config :phbank, PhbankWeb.Endpoint,
   secret_key_base: "hkhfZ4djayeJbawCzAfojB2B9b1BQt9APagzJw2ogqClgWdLPqX1oVG4hQKuqarZ",
   render_errors: [view: PhbankWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Phbank.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "qNf2qWU4"]
+  live_view: [signing_salt: "cjZYfC9dWM7B2YejaRTDmdywx9zI+Ibr"]
 
 # Configures Elixir's Logger
 config :logger, :console,

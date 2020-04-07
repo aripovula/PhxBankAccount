@@ -7,8 +7,11 @@ defmodule PhbankWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_phbank_key",
-    signing_salt: "+SXs7nHV"
+    signing_salt: "cjZYfC9dWM7B2YejaRTDmdywx9zI+Ibr"
   ]
+
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
 
   socket "/socket", PhbankWeb.UserSocket,
     websocket: true,
