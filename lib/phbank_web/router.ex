@@ -17,6 +17,7 @@ defmodule PhbankWeb.Router do
     pipe_through :browser
 
     live("/", Counter)
+    live("/current_accs", CurrentAccs)
     resources "/current_accs", CurrentAccController
   end
 
