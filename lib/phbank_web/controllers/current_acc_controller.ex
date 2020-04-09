@@ -1,12 +1,15 @@
 defmodule PhbankWeb.CurrentAccController do
   use PhbankWeb, :controller
 
+  import Phoenix.LiveView.Controller
+
   alias Phbank.Deposits
   alias Phbank.Deposits.CurrentAcc
+  alias PhbankWeb.Live.CurrentAccs.{Index, Show}
 
   def index(conn, _params) do
     current_accs = Deposits.list_current_accs()
-    render(conn, "index.html", current_accs: current_accs)
+    live_render(conn, Index, current_accs: current_accs)
   end
 
   def new(conn, _params) do
@@ -28,7 +31,10 @@ defmodule PhbankWeb.CurrentAccController do
 
   def show(conn, %{"id" => id}) do
     current_acc = Deposits.get_current_acc!(id)
-    render(conn, "show.html", current_acc: current_acc)
+
+    live_render(conn, Show, session: %{
+      "current_acc" => current_acc
+    })
   end
 
   def edit(conn, params) do

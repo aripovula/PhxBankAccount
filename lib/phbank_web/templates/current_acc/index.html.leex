@@ -1,4 +1,5 @@
 <h2>Current accounts</h2>
+<%= @val2%>
 
 <table>
   <thead>
@@ -11,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for current_acc <- @current_accs do %>
+<%= for current_acc <- @current_accs|>Enum.slice(@val * 2, 2) do %>
     <tr>
       <td><%= current_acc.accountNumber %></td>
       <td><%= current_acc.balance %></td>
@@ -19,6 +20,7 @@
       <td>
         <span><%= link "details", to: Routes.current_acc_path(@socket, :show, current_acc) %>&nbsp; &nbsp;</span>
         <span><%= link "deposit / withdraw", to: Routes.current_acc_path(@socket, :edit, current_acc) %>&nbsp; &nbsp;</span>
+        <span><%= link to: "#", "phx-click": "theid", "phx-value": "example.id" do %> hide/show <% end %>&nbsp; &nbsp;</span>
         <span><%= link "close", to: Routes.current_acc_path(@socket, :delete, current_acc), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
@@ -26,8 +28,13 @@
   </tbody>
 </table>
 
-<button phx-click="prevPage">< previous 4</button>
+<button phx-click="prevPage">< previous 2</button>
 &nbsp;
 page <%= @val %>
 &nbsp;
-<button phx-click="nextPage">next 4 ></button>
+<button phx-click="nextPage">next 2 ></button>
+
+<%= if @val2 do %>
+<%= @values %>
+<h2>test</h2>
+<% end %>

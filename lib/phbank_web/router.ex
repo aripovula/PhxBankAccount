@@ -16,9 +16,9 @@ defmodule PhbankWeb.Router do
   scope "/", PhbankWeb do
     pipe_through :browser
 
-    live("/", Counter)
-    live("/current_accs", CurrentAccs)
-    resources "/current_accs", CurrentAccController
+    live("/", Live.CurrentAccs.Index)
+    live "/current_accs", Live.CurrentAccs.Index
+    resources "/current_acc", CurrentAccController
   end
 
   # Other scopes may use custom stacks.
