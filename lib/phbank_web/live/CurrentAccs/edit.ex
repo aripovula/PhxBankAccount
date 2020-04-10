@@ -1,16 +1,17 @@
-defmodule PhbankWeb.Live.CurrentAccs.Index do
+defmodule PhbankWeb.Live.CurrentAccs.Edit do
 
   use Phoenix.LiveView
 
   alias Phbank.Deposits
 
-  def mount(_params, _session, socket) do
+  def mount(%{"id" => id}, _session, socket) do
     {:ok,
       assign(socket,
       val: 1,
       val2: true,
       values: nil,
-      current_accs: Deposits.list_current_accs()
+      current_acc: Deposits.get_current_acc!(id),
+      changeset: Deposits.change_current_acc(Deposits.get_current_acc!(id))
     ),
     layout: {PhbankWeb.LayoutView, "app.html"}}
   end
@@ -19,16 +20,9 @@ defmodule PhbankWeb.Live.CurrentAccs.Index do
     {:noreply, update(socket, :val, fn val -> val + 1 end)}
   end
 
-  def handle_event("thisPage", _, socket) do
-    {:noreply, update(socket, :val, fn val -> val end)}
-  end
-
   def handle_event("prevPage", _, socket) do
-    # {:noreply, update(socket, :val, fn val  -> val > 1 && val - 1 || val end)}
-    {:noreply, update(socket, :val, fn
-      val when val > 1 -> val - 1
-      val when val <= 1 -> val
-    end)}
+    {:noreply, update(socket, :val, fn val when val <= 1 -> val end)}
+    {:noreply, update(socket, :val, fn val when val > 1 -> val - 1 end)}
   end
 
   def handle_event("theid", _value, socket) do
@@ -38,6 +32,6 @@ defmodule PhbankWeb.Live.CurrentAccs.Index do
 
   def render(assigns) do
     IO.inspect(assigns)
-    PhbankWeb.CurrentAccView.render("index.html", assigns)
+    PhbankWeb.CurrentAccView.render("edit.html", assigns)
   end
 end

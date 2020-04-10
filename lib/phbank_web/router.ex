@@ -18,6 +18,8 @@ defmodule PhbankWeb.Router do
 
     live("/", Live.CurrentAccs.Index)
     live "/current_accs", Live.CurrentAccs.Index
+    live "/current_acc/:id", Live.CurrentAccs.Show
+    live "/current_acc/:id/edit", Live.CurrentAccs.Edit
     resources "/current_acc", CurrentAccController
   end
 

@@ -44,7 +44,7 @@ defmodule PhbankWeb.CurrentAccController do
     # %{"_csrf_token" => _csrf_token} = params
     current_acc = Deposits.get_current_acc!(id)
     changeset = Deposits.change_current_acc(current_acc)
-    render(conn, "edit.html", current_acc: current_acc, changeset: changeset)
+    live_render(conn, "edit.html", current_acc: current_acc, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "current_acc" => %{"balance"=>balance, "deposit" => deposit, "withdrawal" => withdrawal}}) do
