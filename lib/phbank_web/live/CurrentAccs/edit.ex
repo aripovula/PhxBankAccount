@@ -5,13 +5,16 @@ defmodule PhbankWeb.Live.CurrentAccs.Edit do
   alias Phbank.Deposits
 
   def mount(%{"id" => id}, _session, socket) do
+    current_acc = Deposits.get_current_acc!(id)
+    changeset = Deposits.change_current_acc(current_acc)
+
     {:ok,
       assign(socket,
       val: 1,
       val2: true,
       values: nil,
-      current_acc: Deposits.get_current_acc!(id),
-      changeset: Deposits.change_current_acc(Deposits.get_current_acc!(id))
+      current_acc: current_acc,
+      changeset: changeset
     ),
     layout: {PhbankWeb.LayoutView, "app.html"}}
   end

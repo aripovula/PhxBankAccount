@@ -12,6 +12,11 @@ defmodule PhbankWeb.CurrentAccController do
     live_render(conn, Index, current_accs: current_accs)
   end
 
+  def index2(conn, _params) do
+    current_accs = Deposits.list_current_accs()
+    live_render(conn, Index, current_accs: current_accs)
+  end
+
   def new(conn, _params) do
     changeset = Deposits.change_current_acc(%CurrentAcc{})
     render(conn, "new.html", changeset: changeset)
@@ -70,5 +75,9 @@ defmodule PhbankWeb.CurrentAccController do
     conn
     |> put_flash(:info, "Current acc deleted successfully.")
     |> redirect(to: Routes.current_acc_path(conn, :index))
+  end
+
+  def test(conn, _params) do
+    render(conn, "test.html")
   end
 end

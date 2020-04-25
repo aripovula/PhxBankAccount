@@ -1,0 +1,15 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, "Search term:" %>
+  <%= text_input f, :search_term %>
+  <%= error_tag f, :search_term %>
+
+  <div>
+    <%= submit "search" %>
+  </div>
+<% end %>

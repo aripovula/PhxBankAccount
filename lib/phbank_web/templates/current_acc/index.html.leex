@@ -1,13 +1,19 @@
 <h2>Current accounts</h2>
-<%= @val2%>
-
+<br/>
+<%= if @val2|> Kernel.not do %>
+<a phx-click="search">Search</a>
+<% end %>
+<%= if @val2 do %>
+<button phx-click="search">search</button>
+<%# <%= render "form_search.html", Map.put(assigns, :action, Routes.current_acc_path(@socket, :update, @current_accs)) %> 
+<% end %>
+<br/><br/>
 <table>
   <thead>
     <tr>
       <th>Account Number</th>
       <th>Balance</th>
       <th>Status</th>
-
       <th></th>
     </tr>
   </thead>
@@ -20,8 +26,6 @@
       <td>
         <span><%= link "details", to: Routes.current_acc_path(@socket, :show, current_acc) %>&nbsp; &nbsp;</span>
         <span><%= link "deposit / withdraw", to: Routes.current_acc_path(@socket, :edit, current_acc) %>&nbsp; &nbsp;</span>
-        
-        <span><a phx-click="theid" phx-value="<%= current_acc.id %>">Approve</a></span>
         <span><%= link "close", to: Routes.current_acc_path(@socket, :delete, current_acc), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
@@ -36,8 +40,4 @@ page <%= @val %>
 <%# <%= if ((Enum.count(@current_accs)/2) > @val) do %> 
 <button phx-click=<%= ((Enum.count(@current_accs)/2) > @val) && "nextPage" || "thisPage" %>> next 2 ></button>
 <%# <% end %>
-
-<%= if @val2 do %>
-<%= @values %>
-<h2>test</h2>
-<% end %>
+<%= inspect Map.values(assigns) %>

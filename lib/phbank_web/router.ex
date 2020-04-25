@@ -15,11 +15,12 @@ defmodule PhbankWeb.Router do
 
   scope "/", PhbankWeb do
     pipe_through :browser
-
+    get "/test", CurrentAccController, :test
     live("/", Live.CurrentAccs.Index)
     live "/current_accs", Live.CurrentAccs.Index
     live "/current_acc/:id", Live.CurrentAccs.Show
     live "/current_acc/:id/edit", Live.CurrentAccs.Edit
+
     resources "/current_acc", CurrentAccController
   end
 
